@@ -81,6 +81,7 @@ class User < ActiveRecord::Base
   after_create :ensure_in_trust_level_group
   after_create :automatic_group_membership
   after_create do
+    Guardian.new(current_user).can_see_emails = true
     DiscourseEvent.trigger(:user_created, user: self)
   end
 

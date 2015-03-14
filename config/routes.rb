@@ -81,7 +81,8 @@ Discourse::Application.routes.draw do
       delete "revoke_api_key", constraints: AdminConstraint.new
       put "revoke_moderation", constraints: AdminConstraint.new
       put "grant_moderation", constraints: AdminConstraint.new
-      put "approve" => "users#approve", constraints: AdminConstraint.new
+      put "approve"
+      put "custom_approve" => "users#approve", constraints: AdminConstraint.new
       post "refresh_browsers", constraints: AdminConstraint.new
       post "log_out", constraints: AdminConstraint.new
       put "activate"

@@ -80,6 +80,9 @@ class User < ActiveRecord::Base
   after_create :create_user_profile
   after_create :ensure_in_trust_level_group
   after_create :automatic_group_membership
+  after_create do
+    DiscourseEvent.trigger(:user_created, user: self)
+  end
 
   before_save :update_username_lower
   before_save :ensure_password_is_hashed
@@ -88,6 +91,9 @@ class User < ActiveRecord::Base
   after_save :clear_global_notice_if_needed
   after_save :refresh_avatar
   after_save :badge_grant
+  after_save do
+    DiscourseEvent.trigger(:user_verified, user: self) if self.active_changed? && self.active
+  end
 
   before_destroy do
     # These tables don't have primary keys, so destroying them with activerecord is tricky:

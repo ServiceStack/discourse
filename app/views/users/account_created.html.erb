@@ -4,6 +4,7 @@
   <br/>
   <span id="servicestack_expired" style="font-size: 16px; line-height: 24px;display: none">The email provided is either not registered or does not have a valid ServiceStack subscription. Please register your email address on the <a href="https://servicestack.net/account/support">ServiceStack website</a></span>
   <span id="servicestack_valid_account" style="font-size: 16px; line-height: 24px;display: none;">Account registered. An activation email should be sent to your email shortly.</span>
+  <span id="servicestack_expire_soon" style="font-size: 16px; line-height: 24px;display: none;"></span>
 </div>
 
 <%- content_for(:no_ember_head) do %>
@@ -17,6 +18,19 @@
                 $('#servicestack_expired').show();
             } else {
                 $('#servicestack_valid_account').show();
+                var expireDateString = response.Expiry;
+                var unixTime = /Date\(([^)]+)\)/.exec(expireDateString)[1];
+                var expireDate = Date(parseFloat(unixTime));
+                var d = new Date();
+                d.setDate(expireDate.getDate() - 7);
+                if(d > expireDate) {
+                    var expireSoonMessage = 'Your subscription expires soon on the ' +
+                            expireDate.getDate() + '/' +
+                            (expireDate.getMonth() + 1) + '/' +
+                            expireDate.getFullYear();
+                    $('#servicestack_expire_soon').html(expireSoonMessage).show();
+                }
+
             }
         });
 </script>

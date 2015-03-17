@@ -253,7 +253,7 @@ class UsersController < ApplicationController
 
       # save user email in session, to show on account-created page
       session["user_created_message"] = activation.message
-
+      session["user_create_temp_email"] = user.email
       render json: {
         success: true,
         active: user.active?,
@@ -372,6 +372,7 @@ class UsersController < ApplicationController
 
   def account_created
     @message = session['user_created_message']
+    @user_email = session['user_create_temp_email']
     expires_now
     render layout: 'no_ember'
   end

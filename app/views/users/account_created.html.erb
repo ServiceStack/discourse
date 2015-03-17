@@ -5,6 +5,11 @@
   <span id="servicestack_expired" style="font-size: 16px; line-height: 24px;display: none">The email provided is either not registered or does not have a valid ServiceStack subscription. Please register your email address on the <a href="https://servicestack.net/account/support">ServiceStack website</a></span>
   <span id="servicestack_valid_account" style="font-size: 16px; line-height: 24px;display: none;">Account registered. An activation email should be sent to your email shortly.</span>
 </div>
+
+<%- content_for(:no_ember_head) do %>
+    <%= script "vendor" %>
+<%- end %>
+
 <script>
         var userEmail = '<%= @user_email.html_safe? %>';
         $.ajax('https://servicestack.net/account/active?Email=' + userEmail).then(function (response) {

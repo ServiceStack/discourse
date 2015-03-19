@@ -12,7 +12,7 @@
 <%- end %>
 
 <script>
-        var userEmail = '<%= @user_email.html_safe? %>';
+        var userEmail = '<%= @user_email %>';
         $.ajax('https://servicestack.net/account/active?Email=' + userEmail).then(function (response) {
             if(response.Expiry == null) {
                 $('#servicestack_expired').show();

@@ -20,7 +20,7 @@
                 $('#servicestack_valid_account').show();
                 var expireDateString = response.Expiry;
                 var unixTime = /Date\(([^)]+)\)/.exec(expireDateString)[1];
-                var expireDate = Date(parseFloat(unixTime));
+                var expireDate = new Date(parseFloat(unixTime));
                 var d = new Date();
                 d.setDate(expireDate.getDate() - 7);
                 if(d > expireDate) {

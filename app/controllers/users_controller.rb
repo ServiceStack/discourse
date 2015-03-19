@@ -213,7 +213,7 @@ class UsersController < ApplicationController
     end
 
     user = User.new(user_params)
-
+    session["user_create_temp_email"] = user_params[:email]
     # Handle custom fields
     user_fields = UserField.all
     if user_fields.present?
@@ -253,7 +253,6 @@ class UsersController < ApplicationController
 
       # save user email in session, to show on account-created page
       session["user_created_message"] = activation.message
-      session["user_create_temp_email"] = user.email
       render json: {
         success: true,
         active: user.active?,

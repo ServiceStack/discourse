@@ -1,10 +1,20 @@
-<div id='simple-container'>
-  <span style="font-size: 16px; line-height: 24px;"><%= @message.html_safe %></span>
-  <br/>
-  <br/>
-  <span id="servicestack_expired" style="font-size: 16px; line-height: 24px;display: none">The email provided is either not registered or does not have a valid ServiceStack subscription. Please register your email address on the <a href="https://servicestack.net/account/support">ServiceStack website</a></span>
-  <span id="servicestack_valid_account" style="font-size: 16px; line-height: 24px;display: none;">Account registered. An activation email should be sent to your email shortly.</span>
-  <span id="servicestack_expire_soon" style="font-size: 16px; line-height: 24px;display: none;"></span>
+<div id='simple-container' style='font-size:16px; line-height: 24px;'>
+  <div><p><%= @message.html_safe %></p></div>
+  <div id="servicestack_expired" style="display:none;">
+    <h4>These forums are for active ServiceStack Customers only</h4>
+    <p>
+      The email provided is either not registered or does not have an active ServiceStack subscription. 
+      Please check your subscription or register your email at: 
+      <a href="https://servicestack.net/account/support">servicestack.net/account/support</a>
+    </p>
+  </div>
+  <div id="servicestack_valid_account" style="display:none;">
+    <h4>Account registered</h4>
+    <p>
+      An activation email should be sent to your email shortly.
+    </p>
+  </div>
+  <p id="servicestack_expire_soon" style="color:red; display:none;"></p>
 </div>
 
 <%- content_for(:no_ember_head) do %>

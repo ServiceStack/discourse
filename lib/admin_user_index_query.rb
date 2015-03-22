@@ -11,7 +11,10 @@ class AdminUserIndexQuery
   attr_reader :params, :trust_levels
 
   def find_users(limit=100)
-    find_users_query.includes(:user_stat).limit(limit)
+    if params[:limit].present?
+      find_users_query.includes(:user_stat).limit(params[:limit])
+    else
+      find_users_query.includes(:user_stat).limit(limit)
   end
 
   def count_users

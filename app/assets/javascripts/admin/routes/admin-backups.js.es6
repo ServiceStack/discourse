@@ -1,11 +1,11 @@
 import showModal from 'discourse/lib/show-modal';
 
+const LOG_CHANNEL = "/admin/backups/logs";
+
 export default Discourse.Route.extend({
 
-  LOG_CHANNEL: "/admin/backups/logs",
-
   activate() {
-    Discourse.MessageBus.subscribe(this.LOG_CHANNEL, this._processLogMessage.bind(this));
+    this.messageBus.subscribe(LOG_CHANNEL, this._processLogMessage.bind(this));
   },
 
   _processLogMessage(log) {
@@ -40,12 +40,12 @@ export default Discourse.Route.extend({
   },
 
   deactivate() {
-    Discourse.MessageBus.unsubscribe(this.LOG_CHANNEL);
+    this.messageBus.unsubscribe(LOG_CHANNEL);
   },
 
   actions: {
     startBackup() {
-      showModal('admin_start_backup');
+      showModal('modals/admin-start-backup');
       this.controllerFor('modal').set('modalClass', 'start-backup-modal');
     },
 

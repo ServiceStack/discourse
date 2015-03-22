@@ -15,6 +15,7 @@ class AdminUserIndexQuery
       find_users_query.includes(:user_stat).limit(params[:limit])
     else
       find_users_query.includes(:user_stat).limit(limit)
+    end
   end
 
   def count_users
